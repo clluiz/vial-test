@@ -11,13 +11,17 @@ type Form = {
 
 type Answer = {
   question: string
-  value: string | number | boolean
+  answer: string | number | boolean
 }
 
 type SubmitFormData = {
   formId: string;
   sourceData: any;
-};
+}
+
+type Payload = {
+  [key: string]: string | boolean | number
+}
 
 const useSubmitForm = () => {
   return useMutation({
@@ -56,19 +60,19 @@ export const SubmitForm: React.FC = () => {
   });
   const { mutate } = useSubmitForm()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!selectedForm) return alert("Please select a form");
     console.log(`Submitting form with ID: ${selectedForm}`);
   };
 
-  const selectForm = (e) => {
+  const selectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value && forms) {
       setSelectedForm(forms.find(f => f.id === e.target.value) || null)
     }
   }
 
-  const submit = (values) => {
+  const submit = (values: Payload) => {
     alert(JSON.stringify(values))
     if (selectedForm) {
       const data: Answer[] = []

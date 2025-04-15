@@ -18,7 +18,7 @@ export type DynamicFormProps = {
   onSubmit: (value: any) => void
 }
 
-function FieldFactory(fieldId: string, field: Field, value: any = "", onChange: (id:string, newValue: any) => void): any {
+function FieldFactory(fieldId: string, field: Field, value: any = "", onChange: (id: string, newValue: any) => void): any {
   switch (field.type) {
     case "boolean":
       return <BooleanInput id={fieldId} onChange={onChange} value={value} />
@@ -40,14 +40,14 @@ function FieldFactory(fieldId: string, field: Field, value: any = "", onChange: 
 
 export const DynamicForm: React.FC<DynamicFormProps> = ({ schema, onSubmit }) => {
 
-  const [values, setValues] = React.useState({})
+  const [values, setValues] = React.useState<{ [key: string]: any }>({})
 
-  const submit = (e) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(values)
   }
 
-  const onChange = (field:string, newValue: boolean | number | string) => {
+  const onChange = (field: string, newValue: boolean | number | string) => {
     setValues({
       ...values,
       [field]: newValue

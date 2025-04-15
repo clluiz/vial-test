@@ -11,7 +11,7 @@ type SelectInputProps = {
 
 export const SelectInput: React.FC<SelectInputProps> = ({ id, required, options = [], value, onChange }) => {
 
-  const changeInputValue = (e) => {
+  const changeInputValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(id, e.target.value)
   }
 

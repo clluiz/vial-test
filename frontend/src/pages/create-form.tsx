@@ -27,7 +27,7 @@ interface CreateFormPayload {
   fields: Record<string, FieldPayload>
 }
 
-export const CreateForm:React.FC = () => {
+export const CreateForm: React.FC = () => {
   const [fields, setFields] = React.useState<Field[]>([])
   const [formName, setFormName] = React.useState('Untitled Form')
 
@@ -64,6 +64,7 @@ export const CreateForm:React.FC = () => {
 
   const updateField = (index: number, key: keyof Field, value: any) => {
     const updatedFields = [...fields]
+    //@ts-ignore
     updatedFields[index][key] = value
     setFields(updatedFields)
   }
@@ -110,10 +111,10 @@ export const CreateForm:React.FC = () => {
 
     createFormMutation.mutate(payload, {
       onSuccess: (data) => {
-        console.log('Form created successfully', data)
+        alert(`Form ${data.data.id} created successfully`)
       },
       onError: (error) => {
-        console.error('Error creating form', error)
+        alert(`Error creating form ${error}`)
       },
     })
   }

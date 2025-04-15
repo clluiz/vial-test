@@ -13,7 +13,6 @@ export const RadioInput: React.FC<RadioInputProps> = ({
   id,
   required = false,
   options = [],
-  value,
   onChange,
 }) => {
   const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {

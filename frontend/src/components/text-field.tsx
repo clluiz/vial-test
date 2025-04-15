@@ -8,7 +8,7 @@ type TextField = {
 
 export const TextField: React.FC<TextField> = ({ id, value, onChange, required = false }) => {
 
-  const changeInputValue = (e) => {
+  const changeInputValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange(id, e.target.value)
   }
 

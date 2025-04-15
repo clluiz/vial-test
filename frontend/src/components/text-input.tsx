@@ -8,7 +8,7 @@ type TextInput = {
 
 export const TextInput: React.FC<TextInput> = ({ id, value, onChange, required = false }) => {
 
-  const changeInputValue = (e) => {
+  const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(id, e.target.value)
   }
 
