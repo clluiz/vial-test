@@ -26,3 +26,15 @@ services:
       - database
     ports:
       - 8080:8080
+  frontend:
+    container_name: vial-frontend
+    image: node:18.15.0
+    working_dir: /usr/app/frontend
+    volumes:
+      - ./frontend:/usr/app/frontend
+      - /usr/app/frontend/node_modules
+    command: npm run dev
+    ports:
+      - 5173:5173
+    depends_on:
+      - nodeserver
