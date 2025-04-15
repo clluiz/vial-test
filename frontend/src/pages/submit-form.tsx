@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { DynamicForm } from '../components/dynamic-form';
 import { Loading } from '../components/loading';
+import { useNavigate } from 'react-router-dom';
 
 type Form = {
   id: string
@@ -59,6 +60,7 @@ export const SubmitForm: React.FC = () => {
     }
   });
   const { mutate } = useSubmitForm()
+  const navigate = useNavigate(); 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -73,7 +75,6 @@ export const SubmitForm: React.FC = () => {
   }
 
   const submit = (values: Payload) => {
-    alert(JSON.stringify(values))
     if (selectedForm) {
       const data: Answer[] = []
       for (const fieldId in values) {
@@ -83,7 +84,15 @@ export const SubmitForm: React.FC = () => {
         })
       }
 
-      mutate({ formId: selectedForm.id, sourceData: data })
+      mutate({ formId: selectedForm.id, sourceData: data }, {
+        onSuccess: () => {
+          alert("Answers saved correclty!")
+          navigate("/")
+        },
+        onError: (error) => {
+          console.error("Mutation failed:", error);
+        }
+      })
     }
   }
 

@@ -6,6 +6,7 @@ import { Home } from './pages/home'
 
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import NotFound from './pages/not-found'
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/create-form" element={<CreateForm />} />
             <Route path="/submit-form/:form-id?" element={<SubmitForm />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <div className="p-5 flex-1">
             <Outlet />
