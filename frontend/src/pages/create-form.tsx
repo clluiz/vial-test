@@ -1,5 +1,6 @@
 import React from 'react'
 import { useMutation } from '@tanstack/react-query'
+import { Trash } from 'lucide-react'
 
 type FieldType = 'text' | 'textfield' | 'radio' | 'select' | 'boolean' | 'number' | 'datetime'
 
@@ -119,6 +120,14 @@ export const CreateForm: React.FC = () => {
     })
   }
 
+  const remove = (index:number) => {
+    const updatedFields = [...fields]
+    if (index >= 0 && index < updatedFields.length) {
+      updatedFields.splice(index, 1);
+    }
+    setFields(updatedFields)
+  }
+
   return (
     <form onSubmit={handleSubmit} className="p-4 space-y-6">
       <div>
@@ -197,6 +206,13 @@ export const CreateForm: React.FC = () => {
               </button>
             </div>
           )}
+
+          <div className='flex justify-end'>
+            <button className='text-xs items-center  p-2 flex rounded-sm cursor-pointer bg-red-500 text-white' onClick={() => remove(index)}>
+              <Trash size={20}/>
+              Remove
+            </button>
+          </div>
         </div>
       ))}
 
